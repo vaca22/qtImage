@@ -9,64 +9,59 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
-from PyQt5.QtWidgets import QMessageBox
+
 
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
-        MainWindow.resize(800, 600)
+        MainWindow.resize(1002, 713)
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
+        self.gagax = QtWidgets.QComboBox(self.centralwidget)
+        self.gagax.setGeometry(QtCore.QRect(90, 90, 121, 61))
+        self.gagax.setObjectName("gagax")
+        self.gagax.addItem("")
+        self.gagax.addItem("")
+        self.gagax_2 = QtWidgets.QComboBox(self.centralwidget)
+        self.gagax_2.setGeometry(QtCore.QRect(580, 100, 121, 61))
+        self.gagax_2.setObjectName("gagax_2")
+        self.gagax_2.addItem("")
+        self.gagax_2.addItem("")
+        self.pushButton = QtWidgets.QPushButton(self.centralwidget)
+        self.pushButton.setGeometry(QtCore.QRect(330, 430, 231, 131))
+        self.pushButton.setObjectName("pushButton")
         self.label = QtWidgets.QLabel(self.centralwidget)
-        self.label.setGeometry(QtCore.QRect(10, 10, 701, 381))
-        self.label.setText("")
-        self.label.setPixmap(QtGui.QPixmap("ga.jpg"))
-        self.label.setScaledContents(True)
+        self.label.setGeometry(QtCore.QRect(380, 250, 111, 71))
         self.label.setObjectName("label")
-        self.cat = QtWidgets.QPushButton(self.centralwidget)
-        self.cat.setGeometry(QtCore.QRect(0, 410, 361, 101))
-        self.cat.setObjectName("cat")
-        self.dog = QtWidgets.QPushButton(self.centralwidget)
-        self.dog.setGeometry(QtCore.QRect(370, 410, 421, 111))
-        self.dog.setObjectName("dog")
         MainWindow.setCentralWidget(self.centralwidget)
         self.menubar = QtWidgets.QMenuBar(MainWindow)
-        self.menubar.setGeometry(QtCore.QRect(0, 0, 800, 26))
+        self.menubar.setGeometry(QtCore.QRect(0, 0, 1002, 26))
         self.menubar.setObjectName("menubar")
         MainWindow.setMenuBar(self.menubar)
         self.statusbar = QtWidgets.QStatusBar(MainWindow)
         self.statusbar.setObjectName("statusbar")
         MainWindow.setStatusBar(self.statusbar)
 
+        self.gagax.addItem("fuck")
+        index = self.gagax.findText("0",QtCore.Qt.MatchFixedString)
+        self.gagax.setCurrentIndex(index)
+
+        self.pushButton.clicked.connect(self.pressed)
+
         self.retranslateUi(MainWindow)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
-
-        self.dog.clicked.connect(lambda :self.show_pop())
-        self.cat.clicked.connect(lambda :self.show_cat())
-
-    def show_dog(self):
-        self.label.setPixmap(QtGui.QPixmap("da.jpg"))
-    def show_cat(self):
-        self.label.setPixmap(QtGui.QPixmap("ga.jpg"))
 
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
-        self.cat.setText(_translate("MainWindow", "gaga"))
-        self.dog.setText(_translate("MainWindow", "dada"))
+        self.gagax.setItemText(0, _translate("MainWindow", "1"))
+        self.gagax.setItemText(1, _translate("MainWindow", "0"))
+        self.gagax_2.setItemText(0, _translate("MainWindow", "1"))
+        self.gagax_2.setItemText(1, _translate("MainWindow", "0"))
+        self.pushButton.setText(_translate("MainWindow", "Submit"))
+        self.label.setText(_translate("MainWindow", "x or y"))
 
-    def show_pop(self):
-        msg = QMessageBox()
-        msg.setWindowTitle("Tutorial on PyQt5")
-        msg.setText("This is the main text")
-        msg.setIcon(QMessageBox.Critical)
-        msg.setStandardButtons(QMessageBox.Cancel|QMessageBox.Retry|QMessageBox.Ignore)
-        msg.setDefaultButton(QMessageBox.Retry)
-        msg.setInformativeText("gaga")
-        msg.setDetailedText("details")
-        msg.buttonClicked.connect(self.popup_button)
-        x = msg.exec_()
 
-    def popup_button(self,i):
-        print(i.text())
-
+    def pressed(self):
+        print(self.gagax.currentText())
+        print(self.gagax_2.currentText())
